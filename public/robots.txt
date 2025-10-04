@@ -1,2 +1,26 @@
+# robots.txt - EthereumScan.Space
+# SEO and crawling instructions for search engines
+
 User-agent: *
-Disallow:
+Allow: /
+
+# Block sensitive or irrelevant areas from being indexed
+Disallow: /admin/
+Disallow: /login/
+Disallow: /register/
+Disallow: /dashboard/
+Disallow: /storage/
+Disallow: /search
+
+# Main sitemap location
+Sitemap: https://ethereumscan.space/sitemap.xml
+
+# Specific rules for important crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# (Optional) Set a crawl delay to reduce server load
+# Crawl-delay: 5
