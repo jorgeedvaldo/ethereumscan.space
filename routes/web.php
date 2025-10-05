@@ -5,7 +5,6 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\SitemapController;
-use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +24,3 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.post');
 
 Route::get('/feed', [FeedController::class, 'index'])->name('feed');
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
-
-// monte uma route para fazer storage link do laravel
-Route::get('/storage-link', function () {
-     Artisan::call('storage:link');
-     return 'Storage link created';
- });
