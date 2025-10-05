@@ -24,7 +24,7 @@
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="#">Explore Blockchain</a></li>
+
             <li><a href="{{ route('blog.index') }}">Blog</a></li>
         </ul>
     </nav>
