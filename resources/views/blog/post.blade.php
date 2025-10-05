@@ -1,5 +1,31 @@
 @extends('template.app')
 @section('title', $post->title)
+@section('meta_tags')
+<!-- Meta Tags para SEO -->
+<meta name="description" content="{{ $post->meta_description ?? \Illuminate\Support\Str::limit(strip_tags($post->content), 155) }}">
+<meta name="keywords" content="{{ $post->meta_keywords ?? 'Bitcoin, BTC, Ethereum, ETH, DOGE, BNB, Crypto' }}">
+<link rel="canonical" href="{{ route('blog.post', $post->slug) }}">
+
+<!-- Open Graph Meta Tags para redes sociais (Facebook, etc.) -->
+<meta property="og:title" content="{{ $post->title }} | {{ config('app.name', 'Ethereum Scan') }}">
+<meta property="og:description" content="{{ $post->meta_description ?? \Illuminate\Support\Str::limit(strip_tags($post->content), 155) }}">
+@if($post->image)
+    <meta property="og:image" content="{{ asset('storage/' . $post->image) }}">
+@endif
+<meta property="og:url" content="{{ route('blog.post', $post->slug) }}">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="{{ config('app.name', 'Ethereum Scan') }}">
+<meta property="article:published_time" content="{{ $post->created_at->toIso8601String() }}">
+<meta property="article:modified_time" content="{{ $post->updated_at->toIso8601String() }}">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $post->title }} | {{ config('app.name', 'Ethereum Scan') }}">
+<meta name="twitter:description" content="{{ $post->meta_description ?? \Illuminate\Support\Str::limit(strip_tags($post->content), 155) }}">
+@if($post->image)
+    <meta name="twitter:image" content="{{ asset('storage/' . $post->image) }}">
+@endif
+@endsection
 @section('style')
 <style>
     * {
