@@ -1,12 +1,12 @@
 @extends('template.app')
 @section('title', $post->title)
 @section('meta_tags')
-<!-- Meta Tags para SEO -->
+<!-- Meta Tags for SEO -->
 <meta name="description" content="{{ $post->meta_description ?? \Illuminate\Support\Str::limit(strip_tags($post->content), 155) }}">
 <meta name="keywords" content="{{ $post->meta_keywords ?? 'Bitcoin, BTC, Ethereum, ETH, DOGE, BNB, Crypto' }}">
 <link rel="canonical" href="{{ route('blog.post', $post->slug) }}">
 
-<!-- Open Graph Meta Tags para redes sociais (Facebook, etc.) -->
+<!-- Open Graph Meta Tags -->
 <meta property="og:title" content="{{ $post->title }} | {{ config('app.name', 'Ethereum Scan') }}">
 <meta property="og:description" content="{{ $post->meta_description ?? \Illuminate\Support\Str::limit(strip_tags($post->content), 155) }}">
 @if($post->image)
