@@ -6,6 +6,16 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon.png') }}">
     <title>@yield('title') | {{env('APP_NAME')}}</title>
     @yield('style')
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Q32F4CW80"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-6Q32F4CW80');
+    </script>
 </head>
 <body>
     <nav>
