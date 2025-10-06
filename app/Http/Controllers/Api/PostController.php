@@ -31,11 +31,12 @@ class PostController extends Controller
         }
 
         // ✅ Define a default image (e.g., stored in /public/images)
-        $defaultImage = 'images/post/default.jpg';
+        $defaultImage = '/posts/images/default.jpg';
 
         // ✅ Create the post
         $post = Post::create([
             'title'   => $request->title,
+            'slug' => 'my-slug', // Temporary slug; will be updated in the model's boot method
             'content' => $request->content,
             'status'  => $request->status,
             'user_id' => Auth::id(),
