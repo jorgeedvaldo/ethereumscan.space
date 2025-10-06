@@ -15,13 +15,13 @@ class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
-    protected static ?string $navigationGroup = 'Conteúdo';
+    protected static ?string $navigationGroup = 'Content';
 
     public static function form(Form $form): Form
     {
         return $form->schema([
             Forms\Components\TextInput::make('title')
-                ->label('Título')
+                ->label('Title')
                 ->required()
                 ->maxLength(255)
                 ->reactive()
@@ -31,25 +31,25 @@ class PostResource extends Resource
                 ->label('Slug')
                 ->required()
                 ->unique(ignoreRecord: true)
-                ->helperText('Usado na URL do post (ex: meu-primeiro-post)'),
+                ->helperText('Used in post URL (eg: my-first-post)'),
 
             Forms\Components\RichEditor::make('content')
-                ->label('Conteúdo')
+                ->label('Content')
                 ->required(),
 
             Forms\Components\FileUpload::make('image')
-                ->label('Imagem principal')
+                ->label('Principal Image') // or
                 ->image()
-                ->directory('posts/images') // pasta onde vai armazenar
-                ->maxSize(2048) // tamanho máximo em KB
-                ->imagePreviewHeight('250') // preview no painel
+                ->directory('posts/images') // folder to store
+                ->maxSize(2048) // in KB
+                ->imagePreviewHeight('250')
                 ->required(false),
 
             Forms\Components\Select::make('status')
                 ->label('Status')
                 ->options([
-                    'draft' => 'Rascunho',
-                    'published' => 'Publicado',
+                    'draft' => 'Draft',
+                    'published' => 'Published',
                 ])
                 ->default('draft'),
 
@@ -64,30 +64,29 @@ class PostResource extends Resource
     {
         return $table->columns([
             Tables\Columns\ImageColumn::make('image')
-                ->label('Imagem')
-                ->circular(), // ou ->square()
+                ->label('Image')
+                ->circular(), // ->square()
 
             Tables\Columns\TextColumn::make('title')
-                ->label('Título')
+                ->label('Title')
                 ->sortable()
                 ->searchable(),
 
             Tables\Columns\TextColumn::make('user.name')
-                ->label('Autor'),
+                ->label('Author'),
 
             Tables\Columns\TextColumn::make('status')
-                ->label('Estado')
+                ->label('Status')
                 ->badge(),
 
             Tables\Columns\TextColumn::make('created_at')
-                ->label('Criado em')
+                ->label('Created At')
                 ->dateTime(),
         ]);
     }
 
     public static function mutateFormDataBeforeCreate(array $data): array
     {
-        // ✅ Vincular automaticamente ao utilizador autenticado se quiseres
         $data['user_id'] = Auth::id();
         return $data;
     }
